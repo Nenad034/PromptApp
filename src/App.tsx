@@ -23,6 +23,7 @@ function App() {
   const [exportWidth, setExportWidth] = useState(350)
   const [theme, setTheme] = useState<Theme>('dark')
   const [showThemeMenu, setShowThemeMenu] = useState(false)
+  const [promptName, setPromptName] = useState('AI Agent Prompt')
   const isResizingSidebar = useRef(false)
   const isResizingExport = useRef(false)
 
@@ -142,6 +143,17 @@ function App() {
         <div className="main-content" style={{ 
           width: `calc(100% - ${sidebarWidth}px - ${exportWidth}px - 16px)` 
         }}>
+          <div className="prompt-name-section">
+            <label htmlFor="prompt-name" className="prompt-name-label">Naziv Prompta:</label>
+            <input
+              id="prompt-name"
+              type="text"
+              value={promptName}
+              onChange={(e) => setPromptName(e.target.value)}
+              className="prompt-name-input"
+              placeholder="Unesite naziv prompta..."
+            />
+          </div>
           {selectedCategory && (
             <PromptEditor
               category={selectedCategory}
@@ -155,7 +167,7 @@ function App() {
         </div>
         
         <div className="export-panel" style={{ width: `${exportWidth}px` }}>
-          <ExportPanel categories={categories} />
+          <ExportPanel categories={categories} promptName={promptName} />
         </div>
       </div>
     </div>

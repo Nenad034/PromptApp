@@ -5,14 +5,15 @@ import './ExportPanel.css'
 
 interface ExportPanelProps {
   categories: Category[]
+  promptName: string
 }
 
-export const ExportPanel: React.FC<ExportPanelProps> = ({ categories }) => {
+export const ExportPanel: React.FC<ExportPanelProps> = ({ categories, promptName }) => {
   const [copied, setCopied] = useState(false)
   const [saved, setSaved] = useState(false)
 
   const generatePrompt = (): string => {
-    let prompt = '# AI Agent Prompt\n\n'
+    let prompt = `# ${promptName}\n\n`
 
     const processCategory = (category: Category, level: number = 0) => {
       const indent = '  '.repeat(level)
@@ -58,7 +59,8 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ categories }) => {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `ai-agent-prompt-${Date.now()}.md`
+    const fileName = promptName.toLowerCase().replace(/\s+/g, '-') || 'ai-agent-prompt'
+    a.download = `${fileName}-${Date.now()}.md`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
