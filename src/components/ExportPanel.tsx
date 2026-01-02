@@ -69,8 +69,28 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ categories, promptName
 
   const handleSave = () => {
     const prompt = generatePrompt()
-    localStorage.setItem('saved-prompt', prompt)
-    localStorage.setItem('saved-prompt-date', new Date().toISOString())
+    const saveData = {
+      promptName,
+      categories,
+      timestamp: new Date().toISOString()
+    }
+    
+    // Save to localStorage with timestamp
+    const key = `prompt-saved-${Date.now()}`
+    localStorage.setItem(key, JSON.stringify(saveData))
+    
+    // Also save as current
+    localStorage.setItem('current-prompt', JSON.stringify(saveData))
+    
+    // Keep a list of all saved prompts
+    const savedList = JSON.parse(localStorage.getItem('saved-prompts-list') || '[]')
+    savedList.push({
+      key,
+      name: promptName,
+      timestamp: saveData.timestamp
+    })
+    localStorage.setItem('saved-prompts-list', JSON.stringify(savedList))
+    
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }

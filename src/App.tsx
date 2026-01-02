@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { CategoryTree } from './components/CategoryTree'
 import { PromptEditor } from './components/PromptEditor'
 import { ExportPanel } from './components/ExportPanel'
@@ -26,6 +26,33 @@ function App() {
   const [promptName, setPromptName] = useState('AI Agent Prompt')
   const isResizingSidebar = useRef(false)
   const isResizingExport = useRef(false)
+
+  // Auto-save to localStorage
+  useEffect(() => {
+    const saveData = {
+      promptName,
+      categories,
+      theme,
+      timestamp: new Date().toISOString()
+    }
+    localStorage.setItem('current-prompt', JSON.stringify(saveData))
+    localStorage.setItem(`prompt-${Date.now()}`, JSON.stringify(saveData))
+  }, [promptName, categories, theme])
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('current-prompt')
+    if (saved) {
+      try {
+        const data = JSON.parse(saved)
+        setPromptName(data.promptName || 'AI Agent Prompt')
+        setCategories(data.categories || categories)
+        setTheme(data.theme || 'dark')
+      } catch (e) {
+        console.error('Failed to load saved data:', e)
+      }
+    }
+  }, [])
 
   const updateCategory = (updatedCategory: Category) => {
     const updateRecursive = (cats: Category[]): Category[] => {
