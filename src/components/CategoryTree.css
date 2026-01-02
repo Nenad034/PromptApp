@@ -1,0 +1,139 @@
+.category-tree {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tree-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #444;
+}
+
+.tree-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.add-root-btn {
+  padding: 0.4rem;
+  min-width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tree-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.category-item {
+  user-select: none;
+}
+
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.category-row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.category-row.selected {
+  background-color: rgba(102, 126, 234, 0.2);
+  border-left: 3px solid #667eea;
+}
+
+.expand-btn {
+  padding: 0;
+  min-width: auto;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.expand-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+}
+
+.expand-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.folder-icon {
+  color: #ffd700;
+  flex-shrink: 0;
+}
+
+.category-name {
+  flex: 1;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category-actions {
+  display: none;
+  gap: 0.25rem;
+}
+
+.category-row:hover .category-actions {
+  display: flex;
+}
+
+.icon-btn {
+  padding: 0.25rem;
+  min-width: auto;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+}
+
+.delete-btn:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.category-children {
+  margin-left: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  .tree-header {
+    border-bottom-color: #ddd;
+  }
+
+  .category-row:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .icon-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
