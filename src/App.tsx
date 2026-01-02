@@ -72,8 +72,15 @@ function App() {
     isResizingExport.current = false
   }
 
+  const handleClickOutside = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement
+    if (showThemeMenu && !target.closest('.theme-selector')) {
+      setShowThemeMenu(false)
+    }
+  }
+
   return (
-    <div className={`app theme-${theme}`} onMouseMove={handleMouseMove} onMouseUp={stopResize}>
+    <div className={`app theme-${theme}`} onMouseMove={handleMouseMove} onMouseUp={stopResize} onClick={handleClickOutside}>
       <header className="app-header">
         <div className="header-background">
           <div className="code-line code-line-1">const prompt = categories.map(cat =&gt; generateContent(cat));</div>
