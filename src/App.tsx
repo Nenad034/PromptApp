@@ -83,8 +83,10 @@ function App() {
           <div className="code-line code-line-5">const aiAgent = new Agent(config).train(prompts);</div>
         </div>
         <div className="header-content">
-          <h1>AI Agent Prompt Creator</h1>
-          <p>Kreirajte detaljne prompte sa neograničenim kategorijama</p>
+          <div className="header-text">
+            <h1>AI Agent Prompt Creator</h1>
+            <p>Kreirajte detaljne prompte sa neograničenim kategorijama</p>
+          </div>
           <div className="theme-selector">
             <button 
               className="theme-btn" 
