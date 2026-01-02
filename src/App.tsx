@@ -3,7 +3,10 @@ import { CategoryTree } from './components/CategoryTree'
 import { PromptEditor } from './components/PromptEditor'
 import { ExportPanel } from './components/ExportPanel'
 import { Category } from './types'
+import { Palette } from 'lucide-react'
 import './App.css'
+
+type Theme = 'dark' | 'dark-blue' | 'light' | 'light-green'
 
 function App() {
   const [categories, setCategories] = useState<Category[]>([
@@ -18,6 +21,8 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(categories[0])
   const [sidebarWidth, setSidebarWidth] = useState(300)
   const [exportWidth, setExportWidth] = useState(350)
+  const [theme, setTheme] = useState<Theme>('dark')
+  const [showThemeMenu, setShowThemeMenu] = useState(false)
   const isResizingSidebar = useRef(false)
   const isResizingExport = useRef(false)
 
@@ -68,7 +73,7 @@ function App() {
   }
 
   return (
-    <div className="app" onMouseMove={handleMouseMove} onMouseUp={stopResize}>
+    <div className={`app theme-${theme}`} onMouseMove={handleMouseMove} onMouseUp={stopResize}>
       <header className="app-header">
         <div className="header-background">
           <div className="code-line code-line-1">const prompt = categories.map(cat =&gt; generateContent(cat));</div>
@@ -80,6 +85,31 @@ function App() {
         <div className="header-content">
           <h1>AI Agent Prompt Creator</h1>
           <p>Kreirajte detaljne prompte sa neograničenim kategorijama</p>
+          <div className="theme-selector">
+            <button 
+              className="theme-btn" 
+              onClick={() => setShowThemeMenu(!showThemeMenu)}
+              title="Promeni temu"
+            >
+              <Palette size={20} />
+            </button>
+            {showThemeMenu && (
+              <div className="theme-menu">
+                <button onClick={() => { setTheme('dark'); setShowThemeMenu(false); }}>
+                  Dark Purple
+                </button>
+                <button onClick={() => { setTheme('dark-blue'); setShowThemeMenu(false); }}>
+                  Dark Blue
+                </button>
+                <button onClick={() => { setTheme('light'); setShowThemeMenu(false); }}>
+                  Light Blue
+                </button>
+                <button onClick={() => { setTheme('light-green'); setShowThemeMenu(false); }}>
+                  Light Green
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
       
