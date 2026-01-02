@@ -91,6 +91,19 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ categories, promptName
     })
     localStorage.setItem('saved-prompts-list', JSON.stringify(savedList))
     
+    // Auto-download as file
+    const blob = new Blob([prompt], { type: 'text/markdown' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    const fileName = promptName.toLowerCase().replace(/\s+/g, '-') || 'ai-agent-prompt'
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
+    a.download = `${fileName}-${timestamp}.md`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+    
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }
