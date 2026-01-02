@@ -71,10 +71,10 @@ function App() {
     <div className="app" onMouseMove={handleMouseMove} onMouseUp={stopResize}>
       <header className="app-header">
         <div className="header-background">
-          <div className="code-line code-line-1">const prompt = categories.map(cat => generateContent(cat));</div>
-          <div className="code-line code-line-2">function createPrompt(data) {'{'} return AI.process(data); {'}'}</div>
-          <div className="code-line code-line-3">export default {'{'} CategoryTree, PromptEditor, ExportPanel {'}'};</div>
-          <div className="code-line code-line-4">import {'{'} useState, useEffect {'}'} from 'react';</div>
+          <div className="code-line code-line-1">const prompt = categories.map(cat =&gt; generateContent(cat));</div>
+          <div className="code-line code-line-2">function createPrompt(data) &#123; return AI.process(data); &#125;</div>
+          <div className="code-line code-line-3">export default &#123; CategoryTree, PromptEditor, ExportPanel &#125;;</div>
+          <div className="code-line code-line-4">import &#123; useState, useEffect &#125; from 'react';</div>
           <div className="code-line code-line-5">const aiAgent = new Agent(config).train(prompts);</div>
         </div>
         <div className="header-content">
