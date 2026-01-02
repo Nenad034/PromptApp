@@ -11,4 +11,6 @@ export interface ImportedFile {
   name: string;
   content: string;
   size: number;
+  isLink?: boolean;
+  path?: string;
 }

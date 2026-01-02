@@ -146,6 +146,27 @@
   color: #ce9178;
 }
 
+.syntax-link {
+  color: #d7ba7d;
+}
+
+.syntax-link code {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  color: #4ec9b0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.syntax-note {
+  color: #808080;
+  font-style: italic;
+}
+
+.syntax-note em {
+  color: #9cdcfe;
+}
+
 .syntax-text {
   color: rgba(255, 255, 255, 0.9);
   white-space: pre-wrap;
@@ -216,6 +237,23 @@
 
   .syntax-list {
     color: #a31515;
+  }
+
+  .syntax-link {
+    color: #795e26;
+  }
+
+  .syntax-link code {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #267f99;
+  }
+
+  .syntax-note {
+    color: #808080;
+  }
+
+  .syntax-note em {
+    color: #0451a5;
   }
 
   .syntax-text {

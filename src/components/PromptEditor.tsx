@@ -28,17 +28,50 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({ category, onUpdate }
     if (!files) return
 
     Array.from(files).forEach(file => {
-      const reader = new FileReader()
-      reader.onload = (event) => {
+      const maxSize = 5 * 1024 * 1024 // 5MB
+      const textFormats = ['.txt', '.md', '.json', '.js', '.jsx', '.ts', '.tsx', '.css', '.html', '.xml', '.yaml', '.yml', '.py', '.java', '.c', '.cpp', '.h', '.cs', '.php', '.rb', '.go', '.rs', '.swift', '.kt']
+      
+      const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase()
+      const isTextFile = textFormats.includes(fileExtension)
+      
+      // Ako je fajl prevelik ili nije tekstualni format, kreiraj link
+      if (file.size > maxSize || !isTextFile) {
         const newFile: ImportedFile = {
           id: Date.now().toString() + Math.random(),
           name: file.name,
-          content: event.target?.result as string,
-          size: file.size
+          content: '',
+          size: file.size,
+          isLink: true,
+          path: file.name
         }
         onUpdate({ ...category, files: [...category.files, newFile] })
+      } else {
+        // Pokušaj da učitaš kao tekst
+        const reader = new FileReader()
+        reader.onload = (event) => {
+          const newFile: ImportedFile = {
+            id: Date.now().toString() + Math.random(),
+            name: file.name,
+            content: event.target?.result as string,
+            size: file.size,
+            isLink: false
+          }
+          onUpdate({ ...category, files: [...category.files, newFile] })
+        }
+        reader.onerror = () => {
+          // Ako učitavanje ne uspe, kreiraj link
+          const newFile: ImportedFile = {
+            id: Date.now().toString() + Math.random(),
+            name: file.name,
+            content: '',
+            size: file.size,
+            isLink: true,
+            path: file.name
+          }
+          onUpdate({ ...category, files: [...category.files, newFile] })
+        }
+        reader.readAsText(file)
       }
-      reader.readAsText(file)
     })
 
     // Reset input
@@ -97,8 +130,14 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({ category, onUpdate }
               <div key={file.id} className="file-item">
                 <File size={16} className="file-icon" />
                 <div className="file-info">
-                  <span className="file-name">{file.name}</span>
-                  <span className="file-size">{formatFileSize(file.size)}</span>
+                  <span className="file-name">
+                    {file.name}
+                    {file.isLink && <span className="file-badge">Link</span>}
+                  </span>
+                  <span className="file-size">
+                    {formatFileSize(file.size)}
+                    {file.isLink && ' • Nije učitan (link ka fajlu)'}
+                  </span>
                 </div>
                 <button
                   className="remove-file-btn"

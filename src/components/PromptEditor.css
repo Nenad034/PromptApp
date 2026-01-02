@@ -108,6 +108,19 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.file-badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background-color: #667eea;
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  font-weight: 600;
 }
 
 .file-size {

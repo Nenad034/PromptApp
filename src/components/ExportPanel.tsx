@@ -27,8 +27,13 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ categories }) => {
       if (category.files.length > 0) {
         prompt += `${indent}**Importovani fajlovi:**\n\n`
         category.files.forEach(file => {
-          prompt += `${indent}- **${file.name}**\n`
-          prompt += `${indent}\`\`\`\n${file.content}\n${indent}\`\`\`\n\n`
+          if (file.isLink) {
+            prompt += `${indent}- **${file.name}** (Link: \`${file.path || file.name}\`)\n`
+            prompt += `${indent}  *Napomena: Fajl nije učitan - prevelik ili nije tekstualni format*\n\n`
+          } else {
+            prompt += `${indent}- **${file.name}**\n`
+            prompt += `${indent}\`\`\`\n${file.content}\n${indent}\`\`\`\n\n`
+          }
         })
       }
 
@@ -92,10 +97,22 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ categories }) => {
       if (line.startsWith('#')) {
         return <div key={index} className="syntax-h1">{line}</div>
       }
+      // Italic (Napomena)
+      if (line.includes('*Napomena:')) {
+        return <div key={index} className="syntax-note" dangerouslySetInnerHTML={{ 
+          __html: line.replace(/\*(.*?)\*/g, '<em>$1</em>') 
+        }} />
+      }
       // Bold text
       if (line.includes('**')) {
         return <div key={index} className="syntax-bold" dangerouslySetInnerHTML={{ 
           __html: line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+        }} />
+      }
+      // Code inline (Link paths)
+      if (line.includes('`') && line.includes('Link:')) {
+        return <div key={index} className="syntax-link" dangerouslySetInnerHTML={{ 
+          __html: line.replace(/`(.*?)`/g, '<code>$1</code>') 
         }} />
       }
       // Code blocks
