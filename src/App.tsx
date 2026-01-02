@@ -70,8 +70,17 @@ function App() {
   return (
     <div className="app" onMouseMove={handleMouseMove} onMouseUp={stopResize}>
       <header className="app-header">
-        <h1>AI Agent Prompt Creator</h1>
-        <p>Kreirajte detaljne prompte sa neograničenim kategorijama</p>
+        <div className="header-background">
+          <div className="code-line code-line-1">const prompt = categories.map(cat => generateContent(cat));</div>
+          <div className="code-line code-line-2">function createPrompt(data) {'{'} return AI.process(data); {'}'}</div>
+          <div className="code-line code-line-3">export default {'{'} CategoryTree, PromptEditor, ExportPanel {'}'};</div>
+          <div className="code-line code-line-4">import {'{'} useState, useEffect {'}'} from 'react';</div>
+          <div className="code-line code-line-5">const aiAgent = new Agent(config).train(prompts);</div>
+        </div>
+        <div className="header-content">
+          <h1>AI Agent Prompt Creator</h1>
+          <p>Kreirajte detaljne prompte sa neograničenim kategorijama</p>
+        </div>
       </header>
       
       <div className="app-content">
