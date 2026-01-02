@@ -6,7 +6,7 @@ import { Category } from './types'
 import { Palette } from 'lucide-react'
 import './App.css'
 
-type Theme = 'dark' | 'dark-blue' | 'light' | 'light-green'
+type Theme = 'dark' | 'dark-blue' | 'light' | 'light-green' | 'light-gray'
 
 function App() {
   const [categories, setCategories] = useState<Category[]>([
@@ -105,16 +105,19 @@ function App() {
             {showThemeMenu && (
               <div className="theme-menu">
                 <button onClick={() => { setTheme('dark'); setShowThemeMenu(false); }}>
-                  Dark Purple
+                  🟣 Dark Purple
                 </button>
                 <button onClick={() => { setTheme('dark-blue'); setShowThemeMenu(false); }}>
-                  Dark Blue
+                  🔵 Dark Blue
                 </button>
                 <button onClick={() => { setTheme('light'); setShowThemeMenu(false); }}>
-                  Light Blue
+                  💙 Light Blue
                 </button>
                 <button onClick={() => { setTheme('light-green'); setShowThemeMenu(false); }}>
-                  Light Green
+                  💚 Light Green
+                </button>
+                <button onClick={() => { setTheme('light-gray'); setShowThemeMenu(false); }}>
+                  ⚪ Light Gray
                 </button>
               </div>
             )}

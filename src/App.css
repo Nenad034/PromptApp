@@ -68,6 +68,20 @@
   --hover-bg: rgba(16, 185, 129, 0.1);
 }
 
+/* Light Gray Theme */
+.theme-light-gray {
+  --header-gradient-start: #6b7280;
+  --header-gradient-end: #4b5563;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --text-primary: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --border-color: #e5e7eb;
+  --accent-color: #6b7280;
+  --hover-bg: rgba(107, 114, 128, 0.1);
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -194,9 +208,11 @@
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
+  overflow: visible;
   z-index: 99999;
-  min-width: 150px;
+  min-width: 180px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .theme-menu button {
