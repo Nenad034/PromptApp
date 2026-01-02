@@ -10,13 +10,14 @@
   align-items: center;
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .tree-header h3 {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .add-root-btn {
@@ -48,12 +49,12 @@
 }
 
 .category-row:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--hover-bg);
 }
 
 .category-row.selected {
-  background-color: rgba(102, 126, 234, 0.2);
-  border-left: 3px solid #667eea;
+  background-color: var(--hover-bg);
+  border-left: 3px solid var(--accent-color);
 }
 
 .expand-btn {
@@ -68,7 +69,7 @@
 }
 
 .expand-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--hover-bg);
   border: none;
 }
 
@@ -111,7 +112,7 @@
 }
 
 .icon-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--hover-bg);
   border: none;
 }
 
@@ -122,18 +123,4 @@
 
 .category-children {
   margin-left: 0;
-}
-
-@media (prefers-color-scheme: light) {
-  .tree-header {
-    border-bottom-color: #ddd;
-  }
-
-  .category-row:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  .icon-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
 }
